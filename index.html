@@ -32,14 +32,40 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="home" class="hero">
-        <div class="container hero-content">
-            <h1>Action for Coastal Resilience</h1>
-            <p>A student-led organization at the University of Cape Coast dedicated to protecting Ghana’s coastline through education, action, and research.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn-primary">Become a Member</a>
-                <a href="#about" class="btn-secondary">Learn More</a>
+        <!-- Hero Slider -->
+    <header id="home" class="hero-slider">
+        <!-- Slide 1: Image -->
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1468581264429-2548ef9eb732?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+        
+        <!-- Slide 2: Image -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+        
+        <!-- Slide 3: Video (Optional) -->
+        <div class="slide video-slide">
+            <video autoplay muted loop playsinline>
+                <source src="coastal.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Content Overlay (stays fixed) -->
+        <div class="hero-content-overlay">
+            <div class="container">
+                <h1>Action for Coastal Resilience</h1>
+                <p>A student-led organization at the University of Cape Coast dedicated to protecting Ghana’s coastline through education, action, and research.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Become a Member</a>
+                    <a href="#about" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </header>
             </div>
         </div>
     </header>
@@ -193,6 +219,36 @@
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+    </script>
+        <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentIndex + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        // Auto-slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Initialize first slide
+        showSlide(0);
     </script>
 </body>
 </html>
